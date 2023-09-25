@@ -4,7 +4,7 @@ pipeline {
   stages{
     stage('Welcome'){
       steps{
-        echo 'this is from develop branch '
+        echo 'this is from hotfix branch '
       }
     }
   }
