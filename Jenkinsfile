@@ -14,11 +14,10 @@ pipeline {
 				echo "Welcome ${name}"
 				echo "You enrolled for ${course} course"
 				echo "you are certified in ${cloud} Course"
+                sh "printenv"
 			}
 		}
 		
-			
+		}
 		
-	}
 }
-
