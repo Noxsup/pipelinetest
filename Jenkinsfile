@@ -1,20 +1,23 @@
 pipeline {
     agent any
+    environment {
+        Deploy_to = 'productions'
+    }
     stages {
-        stage("When Example") {
-            when {  
-                expression {
-                    BRANCH_NAME ==~ /(production|staging)/
+        stage('When example / allof') {
+            when {
+                allof {
+                    branch "production"
+                    environment name: 'Deploy_2', value: 'production'
                 }
             }
             steps {
-                echo "Deploying in Jenkins"
+                echo "All conditions are satisfied"
             }
         }
-        stage ('SecondStage') {
+        stage('second stage'){
             steps {
-                echo "Execute , irrespsctive of the condition"
+                echo "Execute, bla la la la "
             }
         }
-    }
-}
+ }
