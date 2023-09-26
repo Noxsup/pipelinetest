@@ -12,7 +12,7 @@ pipeline {
         }
         stage ('Deploy') {
             when {
-                allOf {
+                anyOf {
                     branch 'production'
                     environment name: 'DEPLOY_TO', value: 'Sasukeeeeee !!!!!!!'
                 }
