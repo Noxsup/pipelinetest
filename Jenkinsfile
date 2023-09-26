@@ -1,17 +1,15 @@
-pipeline{
+
+pipeline {
     agent any
     environment {
-        // course = "gcp"
-        Deploy_to = "productions"
-
+        Deploy_to = 'Production'
     }
     stages {
-        stage('when example') {
+        stage('when/not condition') {
             when {
-                environment name : 'Deploy_to', value: 'production'
-            }
-            steps {
-                echo "deploying in jenkins"
+                not {
+                    equals expected:'productions', actual:"${Deploy_to}"
+                }
             }
         }
     }
