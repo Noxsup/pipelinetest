@@ -1,23 +1,24 @@
+//allOf
 pipeline {
-    agent any
+    agent any 
     environment {
-        deploy_to = 'Production'
+        DEPLOY_TO = "siva" // static , hard
     }
     stages {
-        stage('Example of allOf') {
+        stage ('Example Build') {
             steps {
-                echo "Build stage, SHINEEEEEEEEEEEEEEEEE !!!!!!!!!!!!"
+                echo "Build stage!!!!!!"
             }
         }
         stage ('Deploy') {
             when {
                 allOf {
                     branch 'production'
-                    environment name: 'deploy_to', value: 'Production'
+                    environment name: 'DEPLOY_TO', value: 'siva'
                 }
-                steps {
-                    echo "Deploying in Prod Environment"
-                }
+            }
+            steps {
+                echo "Deploying in Prod environment"
             }
         }
     }
