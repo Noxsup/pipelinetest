@@ -1,15 +1,17 @@
-
 pipeline {
     agent any
     environment {
-        Deploy_to = 'Production'
+        Deploy_to ='Productions'
     }
     stages {
-        stage('when/not condition') {
+        stage('When Example') {
             when {
                 not {
-                    equals expected:'productions', actual:"${Deploy_to}"
+                    equals expected: "productions", actual: "${Deploy_to}"
                 }
+            }
+            steps {
+                echo "Deploy in Jenkins"
             }
         }
     }
