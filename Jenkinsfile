@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment {
         // course = "gcp"
-        Deploy_to = "production"
+        Deploy_to = "productions"
 
     }
     stages {
