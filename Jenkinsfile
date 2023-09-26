@@ -22,5 +22,14 @@ pipeline {
                 echo "Deploying in Prod environment"
             }
         }
+        stage('prod') {
+            when {
+                buildingTag()
+            }
+        }
+        steps {
+            echo 'Deploying to prod'
+        }
     }
+}
 }
