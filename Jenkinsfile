@@ -1,39 +1,39 @@
 pipeline {
-    agent any
+    agent any 
     stages {
-        stage('build') {
+        stage ('Build'){
             steps {
-                echo 'Building maven application'
+                echo "Building maven application"
             }
         }
-        stage("scan") {
+        stage ('Scans'){
+            failFast true
             parallel {
-                stage('Sonar') {
-                    echo 'Performing sonar scans'
-                    sleep 10
-                }
-                stage('Fortify') {
-                    steps{
-                        echo "Performing Fortify scans"
-                        sleep 10 
+                stage ('Sonar') {
+                    steps {
+                        echo "***** Performing Sonar Scans*****"
+                        sleep 10
                     }
-
                 }
-                 stage('Fortify') {
-                    steps{
-                        echo "Performing Fortify scans"
-                        sleep 10 
+                stage ('Fortify') {
+                    steps {
+                        echo "***** Performing Fortify Scans"
+                        error "Trying to recreate error message"
+                        sleep 10
                     }
-                 }
+                }
+                stage ('Trivy') {
+                    steps {
+                        echo "***** Performing container Scans"
+                        sleep 10
+                    }
+                }
             }
-
         }
-        stage('Deploy'){
+        stage ('Deploy') {
             steps {
                 echo "Deploying to env"
             }
-
         }
-
     }
 }
