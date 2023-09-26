@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        Deploy_to ='Poductions'
+        Deploy_to ='Poductionss'
     }
     stages {
         stage('When Example') {
