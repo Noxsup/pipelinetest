@@ -1,19 +1,20 @@
-
 pipeline {
     agent any
     stages {
-        stage('Whats happening') {
+        stage('Branch example'){
             when {
                 expression {
                     Branch_name ==~ /{production|staging}/
-                } 
+                }
             }
             steps {
-                echo "deploying in jenkins"
+                echo "Deploying in Jenkins "
             }
         }
-        stage('Secondstage'){
-            echo "Execute, irrespective of condition"
+        stage('Second stage') {
+            steps {
+                echo "Execute, irrespective of the conditions"
+            }
         }
     }
 }
