@@ -1,18 +1,19 @@
+
 pipeline {
     agent any
-    environment {
-        Deploy_to ='Productions'
-    }
     stages {
-        stage('When Example') {
+        stage('Whats happening') {
             when {
-                not {
-                    equals expected: 'Productions', actual: '${Deploy_to}'
-                }
+                expression {
+                    Branch_name ==~ /{production|staging}/
+                } 
             }
             steps {
-                echo "Deploy in Jenkins"
+                echo "deploying in jenkins"
             }
+        }
+        stage('Secondstage'){
+            echo "Execute, irrespective of condition"
         }
     }
 }
