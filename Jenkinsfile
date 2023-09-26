@@ -1,20 +1,18 @@
-pipeline {
-	agent any
-	environment {
-		course = 'Devops Mastery'
-		name = 'SK'
-	}
-	stages {
-		stage('build') {
-			environment {
-				git_creds = credentials('GitCredwithToken') // id for credentials
-			}
-			steps {
-				echo "Git creds are ${git_creds}"
-				echo "userid is ${git_creds_USR}"
-				echo "passwordd is ${git_creds_PSW}"
-			}
-			
-		}
-	}
+pipeline{
+    agent any
+    environment {
+        // course = "gcp"
+        Deploy_to = "production"
+
+    }
+    stages {
+        stage('when example') {
+            when {
+                environment name : 'Deploy_to', value: 'production'
+            }
+            steps {
+                echo "deploying in jenkins"
+            }
+        }
+    }
 }
