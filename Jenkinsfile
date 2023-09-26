@@ -1,13 +1,13 @@
 pipeline {
     agent any
     environment {
-        Deploy_to ='Poductionss'
+        Deploy_to ='Productions'
     }
     stages {
         stage('When Example') {
             when {
                 not {
-                    equals expected: 'Producns', actual: '${Deploy_to}'
+                    equals expected: 'Productions', actual: '${Deploy_to}'
                 }
             }
             steps {
