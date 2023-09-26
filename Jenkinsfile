@@ -1,23 +1,24 @@
 pipeline {
     agent any
     environment {
-        DEPLOY_TO = 'production'
+        deploy_to = 'production'
     }
     stages {
-        stage("When Example") {
-            when {  
-                allOf {
-                    branch 'production'
-                    environment name: 'DEPLOY_TO', value: 'production'
-                }
+        stage ('Example Build'){
+            steps{
+                echo 'Build Stage SHINEEEEEEEEEEEEEE'
             }
-            steps {
-                echo "All conditions satisfied"
-            }
+            
         }
-        stage ('SecondStage') {
-            steps {
-                echo "Execute , irrespsctive of the condition"
+        stage ('Deploy') {
+            when {
+                allof {
+                    branch 'production'
+                    environment name: 'deploy_to', value: 'siva'                
+                }
+                steps {
+                    echo "Deploying in prod environment"
+                }
             }
         }
     }
