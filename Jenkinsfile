@@ -19,16 +19,16 @@ pipeline {
                 }
             }
             steps {
-                echo "Deploying in Prod environment"
+                echo "Deploying in nonprod environment"
             }
         }
-        stage('prod') {
+        stage ('prod'){
             when {
                 buildingTag()
             }
-        }
-        steps {
-            echo 'Deploying to prod'
+            steps {
+                echo "Deploying to prod Kubernetes cluster"
+            }
         }
     }
 }
