@@ -1,40 +1,39 @@
 pipeline {
-    agent any 
-    environment {
-        DEPLOY_TO = "siva" // static , hard
-    }
+    agent any
     stages {
-        stage ('Example Build') {
+        stage('build') {
             steps {
-                echo "Build stage!!!!!!"
+                echo 'Building maven application'
             }
         }
-        stage ('Deploy') {
-            when {
-                anyOf {
-                    expression {
-                        BRANCH_NAME ==~ /(production|staging)/
-                    }
-                    environment name: 'DEPLOY_TO', value: 'siva'
+        stage("scan") {
+            parallel {
+                stage('Sonar') {
+                    echo 'Performing sonar scans'
+                    sleep 10
                 }
+                stage('Fortify') {
+                    steps{
+                        echo "Performing Fortify scans"
+                        sleep 10 
+                    }
+
+                }
+                 stage('Fortify') {
+                    steps{
+                        echo "Performing Fortify scans"
+                        sleep 10 
+                    }
+                 }
             }
-            steps {
-                echo "Deploying in nonprod environment"
-            }
+
         }
-        stage ('prod'){
-            when {
-                //changeRequest() ===> PR's only
-                //buildingTag()
-                // buildingTag will execute when we are building a tag
-                // tag will execute only when we are executign a specfic pattern
-                //tag "release-*"
-                //vx.x.x v1.2.3
-                tag pattern: "v\\d{1,2}.\\d{1,2}.\\d{1,2}", comparator: "REGEXP"
-            }
+        stage('Deploy'){
             steps {
-                echo "Deploying to prod Kubernetes cluster"
+                echo "Deploying to env"
             }
+
         }
+
     }
 }
