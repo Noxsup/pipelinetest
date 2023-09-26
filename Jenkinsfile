@@ -14,7 +14,7 @@ pipeline {
             when {
                 allOf {
                     branch 'production'
-                    environment name: 'DEPLOY_TO', value: 'siva'
+                    environment name: 'DEPLOY_TO', value: 'Sasukeeeeee !!!!!!!'
                 }
             }
             steps {
