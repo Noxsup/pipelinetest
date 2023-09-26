@@ -1,34 +1,40 @@
 pipeline {
     agent any 
     environment {
-        DEPLOY_TO = "siva" // static , hard
+        deploy_to = 'siva' //static, hard
     }
     stages {
-        stage ('Example Build') {
+        stage('Build stage') {
             steps {
-                echo "Build stage!!!!!!"
+                echo "Build stage"
             }
         }
         stage ('Deploy') {
             when {
                 anyOf {
                     expression {
-                        BRANCH_NAME ==~ /(production|staging)/
+                        Branch_name = 'production'
                     }
-                    environment name: 'DEPLOY_TO', value: 'siva'
                 }
+                environment name: 'production', value: 'siva'
+                
             }
             steps {
-                echo "Deploying in nonprod environment"
+                echo 'Deploying in non prod '
             }
         }
-        stage ('prod'){
+        stage('prod') {
             when {
-                buildingTag()
+                //changeRequest() ===> PR's only
+                //buildingTag()
+                // buildingTag will execute when we are building a tag
+                // tag will execute only when we are executign a specfic pattern
+                //tag "release-*"
+                //vx.x.x v1.2.3
+                tag pattern: "v\\d{1,2}.\\d{1,2}.\\{1,2}", comparator: "REGEXP"
             }
-            steps {
-                echo "Deploying to prod Kubernetes cluster"
-            }
+
         }
+
     }
 }
