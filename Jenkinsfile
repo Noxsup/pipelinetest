@@ -1,24 +1,21 @@
-//allOf
 pipeline {
     agent any 
     environment {
-        DEPLOY_TO = "siva" // static , hard
+        deploy_to = 'Naruto'
     }
     stages {
-        stage ('Example Build') {
-            steps {
-                echo "Build stage!!!!!!"
-            }
-        }
-        stage ('Deploy') {
+        stage('build') {
             when {
                 anyOf {
-                    branch 'production'
-                    environment name: 'DEPLOY_TO', value: 'Sasukeeeeee !!!!!!!'
+                    expression {
+                        Branch_name ==~ /production|staging/
+                    }
+                    environment name: 'deploy_to', value: 'Sasuke'
+
                 }
             }
             steps {
-                echo "Deploying in Prod environment"
+                echo "SHINEEEEEEEEEEEEEEEEEEEE"
             }
         }
     }
