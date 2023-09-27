@@ -4,7 +4,7 @@ pipeline {
         stage ('Build') {
             steps {
                 echo "Building!!!!"
-                error {"Build failed"}
+                error ("Build failed")
             }
         }
     }
