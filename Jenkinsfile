@@ -1,23 +1,25 @@
 pipeline {
     agent any
     stages {
-        stage ('Bulid') {
+        stage ('Build') {
             steps {
-                echo "Building" 
+                echo "Building!!!!"
             }
         }
     }
     post {
-        successs {
-            echo "Post build ==> Success is called"
+        success {
+            echo "Post build ===> Success is called "
         }
         failure {
-            echo "Post build ==> failure is called"
-            // body, can be any code
-            // mailer ===> SRE
+            echo "Post build ===> Failure is called "
+            // body, can be any code 
+            // mailer ===> SRE 
         }
         always {
-            echo "Post build ===> always is called"
+            echo "Post build ===> Always is called "
+
+            // mail method ()
         }
     }
 }
