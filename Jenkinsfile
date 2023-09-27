@@ -1,24 +1,23 @@
 pipeline {
     agent any
-    environment {
-        DEPLOY_TO = 'production'
-    }
     stages {
-        stage("When Example") {
-            when {  
-                allOf {
-                    branch 'production'
-                    environment name: 'DEPLOY_TO', value: 'production'
-                }
-            }
+        stage ('Bulid') {
             steps {
-                echo "All conditions satisfied"
+                echo "Building" !!!!
             }
         }
-        stage ('SecondStage') {
-            steps {
-                echo "Execute , irrespsctive of the condition"
-            }
+    }
+    post {
+        successs {
+            echo "Post build ==> Success is called"
+        }
+        failure {
+            echo "Post build ==> failure is called"
+            // body, can be any code
+            // mailer ===> SRE
+        }
+        always {
+            echo "Post build ===> always is called"
         }
     }
 }
